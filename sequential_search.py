@@ -7,8 +7,7 @@ def sequential_search(data, key):
         if i == key:
             print("found")
             return
-    else:
-        print("not found")
+    print("not found")
 
-user_input = int(input("Enter number"))
+user_input = int(input("Enter number: "))
 sequential_search(data, user_input)
