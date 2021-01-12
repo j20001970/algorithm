@@ -61,8 +61,34 @@ def kruskal(edges):
             selected.append(e)
     print(selected)
 
+def prim(edges, start):
+    # 把邊打成圖，包含權重
+    m_graph = {}
+    # 紀錄造訪過的節點
+    visited = []
+    selected = []
+    for e in edges:
+        if not e[0] in m_graph:
+            m_graph[e[0]] = {}
+        m_graph[e[0]][e[1]] = e[2]
+        if not e[1] in m_graph:
+            m_graph[e[1]] = {}
+        m_graph[e[1]][e[0]] = e[2]
+    visited.append(start)
+    # 選擇的邊是節點數-1
+    while len(visited) < len(m_graph):
+        # 最短邊
+        edge = None
+        for n in visited:
+            for neighbor in m_graph[n]:
+                if not (neighbor in visited) and (edge == None or m_graph[n][neighbor]<edge[2]):
+                    edge = [n, neighbor, m_graph[n][neighbor]]
+        if not edge[0] in visited:
+            visited.append(edge[0])
+        if not edge[1] in visited:
+            visited.append(edge[1])
+        selected.append(edge)
+    print(selected)
 
-        
-
-# kruskal(edges)
-# prim(edges, 'A')
+kruskal(edges)
+prim(edges, 'A')
